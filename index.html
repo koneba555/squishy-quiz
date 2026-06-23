@@ -18,7 +18,15 @@
       padding: 20px; overflow-x: hidden;
     }
 
-    .blob { position: fixed; border-radius: 50%; pointer-events: none; will-change: transform; }
+    .cloud-layer {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      filter: url(#cloud-goo);
+      overflow: hidden;
+    }
+    .cblob {
+      position: absolute; border-radius: 50%; pointer-events: none;
+      will-change: transform; opacity: 1;
+    }
 
     .card {
       background: white; border-radius: 28px;
@@ -158,6 +166,17 @@
   </style>
 </head>
 <body>
+
+  <!-- SVG gooey filter -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <filter id="cloud-goo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="18" result="blur"/>
+      <feColorMatrix in="blur" mode="matrix"
+        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -7" result="goo"/>
+      <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+    </filter>
+  </svg>
+  <div class="cloud-layer" id="cloud-layer"></div>
 
   <div class="card">
     <!-- WELCOME -->
@@ -568,35 +587,34 @@
       window.open('https://www.instagram.com/', '_blank');
     }
 
-    /* ── CLOUD BACKGROUND ────────────────────────────────────────── */
+    /* ── CLOUD BACKGROUND (gooey metaball) ───────────────────────── */
     (function() {
       const COLORS = [
-        '#ffc0e8','#c0d4ff','#c0f0e0','#ffe0b0',
-        '#e8c0ff','#b0ecff','#ffc8c0','#d0c0ff',
-        '#b0ffd8','#ffd0d0','#c0e8ff'
+        '#f5c8e8','#c8d8ff','#c8f0e0','#ffe8c0',
+        '#e8c8ff','#c8eeff','#ffd4c8','#d8c8ff',
+        '#c8fce0','#ffd8e0','#c8e8ff','#ffe8d0',
+        '#ddc8ff','#c8ffd8','#ffcce8'
       ];
-      const COUNT = 11;
+      const COUNT = 16;
+      const layer = document.getElementById('cloud-layer');
       const clouds = [];
 
       for (let i = 0; i < COUNT; i++) {
-        const s  = 260 + Math.random() * 360;
-        const ox = (Math.random() * 110 - 5) / 100 * window.innerWidth;
-        const oy = (Math.random() * 110 - 5) / 100 * window.innerHeight;
-        const col = COLORS[i % COLORS.length];
+        const s  = 120 + Math.random() * 200;
+        const ox = Math.random() * window.innerWidth;
+        const oy = Math.random() * window.innerHeight;
         const el = document.createElement('div');
-        el.style.cssText = [
-          'position:fixed', 'border-radius:50%', 'pointer-events:none', 'will-change:transform',
-          'width:' + s + 'px', 'height:' + s + 'px',
-          'left:' + (ox - s/2) + 'px', 'top:' + (oy - s/2) + 'px',
-          'background:radial-gradient(circle at 38% 38%,' + col + ' 0%,transparent 70%)',
-          'filter:blur(65px)', 'opacity:0.65', 'z-index:0'
-        ].join(';');
-        document.body.appendChild(el);
+        el.className = 'cblob';
+        el.style.cssText =
+          'width:' + s + 'px;height:' + s + 'px;' +
+          'left:' + (ox - s/2) + 'px;top:' + (oy - s/2) + 'px;' +
+          'background:' + COLORS[i % COLORS.length] + ';';
+        layer.appendChild(el);
         clouds.push({
           el, ox, oy, s,
-          pSpeed: (Math.random() * 0.035 + 0.008) * (Math.random() < .5 ? 1 : -1),
-          fAmp:   18 + Math.random() * 28,
-          fSpd:   0.0004 + Math.random() * 0.0007,
+          pSpeed: (Math.random() * 0.04 + 0.01) * (Math.random() < .5 ? 1 : -1),
+          fAmp:   30 + Math.random() * 50,
+          fSpd:   0.0006 + Math.random() * 0.001,
           fOff:   Math.random() * Math.PI * 2,
           cx: 0, cy: 0
         });
@@ -608,26 +626,25 @@
       function tick(t) {
         const hw = window.innerWidth / 2, hh = window.innerHeight / 2;
         clouds.forEach(c => {
-          const floatX = Math.cos(t * c.fSpd * .7 + c.fOff) * c.fAmp * .45;
-          const floatY = Math.sin(t * c.fSpd     + c.fOff) * c.fAmp;
-
+          const floatX = Math.cos(t * c.fSpd * .6 + c.fOff) * c.fAmp * .5;
+          const floatY = Math.sin(t * c.fSpd + c.fOff) * c.fAmp;
           const tx = (mx - hw) * c.pSpeed + floatX;
           const ty = (my - hh) * c.pSpeed + floatY;
 
           const bx = c.ox + c.cx, by = c.oy + c.cy;
-          const dx = mx - bx,     dy = my - by;
+          const dx = mx - bx, dy = my - by;
           const dist = Math.sqrt(dx*dx + dy*dy) || 1;
-          const R = c.s * .68;
+          const R = c.s * .9;
           let rx = 0, ry = 0, sc = 1;
           if (dist < R) {
             const f = (R - dist) / R;
-            rx = -(dx / dist) * f * 90;
-            ry = -(dy / dist) * f * 90;
-            sc = 1 + f * .14;
+            rx = -(dx / dist) * f * 100;
+            ry = -(dy / dist) * f * 100;
+            sc = 1 + f * .18;
           }
 
-          c.cx += (tx + rx - c.cx) * .038;
-          c.cy += (ty + ry - c.cy) * .038;
+          c.cx += (tx + rx - c.cx) * .05;
+          c.cy += (ty + ry - c.cy) * .05;
           c.el.style.transform =
             'translate(' + c.cx.toFixed(1) + 'px,' + c.cy.toFixed(1) + 'px)' +
             ' scale(' + sc.toFixed(3) + ')';
