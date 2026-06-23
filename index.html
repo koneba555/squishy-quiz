@@ -575,6 +575,53 @@
       setTimeout(() => n.textContent = '', 2400);
       window.open('https://www.instagram.com/', '_blank');
     }
+
+    /* ── CLOUD RIPPLE BACKGROUND ──────────────────────────────────── */
+    (function() {
+      const blobs = document.querySelectorAll('.blob');
+      const speeds  = [0.030, -0.020, 0.022, -0.014];
+      const cx = new Array(4).fill(0);
+      const cy = new Array(4).fill(0);
+      let mx = window.innerWidth  / 2;
+      let my = window.innerHeight / 2;
+
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+      function tick() {
+        const hw = window.innerWidth  / 2;
+        const hh = window.innerHeight / 2;
+
+        blobs.forEach((blob, i) => {
+          const rect = blob.getBoundingClientRect();
+          const bx = rect.left + rect.width  / 2 - cx[i];
+          const by = rect.top  + rect.height / 2 - cy[i];
+
+          // Parallax target
+          const tx = (mx - hw) * speeds[i];
+          const ty = (my - hh) * speeds[i];
+
+          // Proximity repel
+          const dx = mx - bx, dy = my - by;
+          const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+          const R = 220;
+          let rx = 0, ry = 0;
+          if (dist < R) {
+            const f = ((R - dist) / R) * 55;
+            rx = -(dx / dist) * f;
+            ry = -(dy / dist) * f;
+          }
+
+          // Lerp (cloud = slow and soft)
+          cx[i] += (tx + rx - cx[i]) * 0.04;
+          cy[i] += (ty + ry - cy[i]) * 0.04;
+
+          blob.style.transform = 'translate(' + cx[i].toFixed(2) + 'px,' + cy[i].toFixed(2) + 'px)';
+        });
+
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
   </script>
 </body>
 </html>
