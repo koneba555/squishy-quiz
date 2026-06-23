@@ -18,11 +18,7 @@
       padding: 20px; overflow-x: hidden;
     }
 
-    .blob { position: fixed; border-radius: 50%; opacity: 0.35; pointer-events: none; }
-    .blob-1 { width: 320px; height: 320px; background: radial-gradient(circle, #ffb3d9, transparent); top: -90px; left: -90px; }
-    .blob-2 { width: 360px; height: 360px; background: radial-gradient(circle, #b3c6ff, transparent); bottom: -110px; right: -110px; }
-    .blob-3 { width: 240px; height: 240px; background: radial-gradient(circle, #c8f0d4, transparent); top: 25%; right: -60px; }
-    .blob-4 { width: 200px; height: 200px; background: radial-gradient(circle, #ffe4b3, transparent); bottom: 25%; left: -50px; }
+    .blob { position: fixed; border-radius: 50%; pointer-events: none; will-change: transform; }
 
     .card {
       background: white; border-radius: 28px;
@@ -162,10 +158,6 @@
   </style>
 </head>
 <body>
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-  <div class="blob blob-4"></div>
 
   <div class="card">
     <!-- WELCOME -->
@@ -578,46 +570,67 @@
 
     /* ── CLOUD RIPPLE BACKGROUND ──────────────────────────────────── */
     (function() {
-      const blobs = document.querySelectorAll('.blob');
-      const speeds  = [0.030, -0.020, 0.022, -0.014];
-      const cx = new Array(4).fill(0);
-      const cy = new Array(4).fill(0);
-      let mx = window.innerWidth  / 2;
-      let my = window.innerHeight / 2;
+      const COLORS = [
+        '#ffb3d9','#b3c6ff','#c8f0d4','#ffe4b3',
+        '#f9c6ff','#b3ecff','#ffd6b3','#d4b3ff',
+        '#b3ffd4','#ffb3b3','#c6d4ff','#ffe9b3'
+      ];
+      const COUNT = 14;
+      const blobs = [];
+      const cx = [], cy = [], speed = [], baseX = [], baseY = [], size = [];
 
+      for (let i = 0; i < COUNT; i++) {
+        const s = 150 + Math.random() * 280;
+        const x = Math.random() * 110 - 5;   // % of vw, slightly offscreen ok
+        const y = Math.random() * 110 - 5;   // % of vh
+        const sp = (Math.random() * 0.05 + 0.01) * (Math.random() < 0.5 ? 1 : -1);
+        const op = 0.22 + Math.random() * 0.22;
+        const col = COLORS[i % COLORS.length];
+
+        const el = document.createElement('div');
+        el.className = 'blob';
+        el.style.cssText = [
+          'width:' + s + 'px', 'height:' + s + 'px',
+          'left:' + x + 'vw', 'top:' + y + 'vh',
+          'background:radial-gradient(circle,' + col + ',transparent)',
+          'opacity:' + op
+        ].join(';');
+        document.body.appendChild(el);
+
+        blobs.push(el);
+        cx.push(0); cy.push(0);
+        speed.push(sp);
+        baseX.push(x); baseY.push(y);
+        size.push(s);
+      }
+
+      let mx = window.innerWidth / 2, my = window.innerHeight / 2;
       document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
       function tick() {
-        const hw = window.innerWidth  / 2;
-        const hh = window.innerHeight / 2;
-
+        const hw = window.innerWidth / 2, hh = window.innerHeight / 2;
         blobs.forEach((blob, i) => {
-          const rect = blob.getBoundingClientRect();
-          const bx = rect.left + rect.width  / 2 - cx[i];
-          const by = rect.top  + rect.height / 2 - cy[i];
+          // Base position in px
+          const bx = baseX[i] / 100 * window.innerWidth  + size[i] / 2 + cx[i];
+          const by = baseY[i] / 100 * window.innerHeight + size[i] / 2 + cy[i];
 
-          // Parallax target
-          const tx = (mx - hw) * speeds[i];
-          const ty = (my - hh) * speeds[i];
+          const tx = (mx - hw) * speed[i];
+          const ty = (my - hh) * speed[i];
 
-          // Proximity repel
           const dx = mx - bx, dy = my - by;
           const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-          const R = 220;
+          const R = 200 + size[i] * 0.3;
           let rx = 0, ry = 0;
           if (dist < R) {
-            const f = ((R - dist) / R) * 55;
+            const f = ((R - dist) / R) * 60;
             rx = -(dx / dist) * f;
             ry = -(dy / dist) * f;
           }
 
-          // Lerp (cloud = slow and soft)
           cx[i] += (tx + rx - cx[i]) * 0.04;
           cy[i] += (ty + ry - cy[i]) * 0.04;
-
-          blob.style.transform = 'translate(' + cx[i].toFixed(2) + 'px,' + cy[i].toFixed(2) + 'px)';
+          blob.style.transform = 'translate(' + cx[i].toFixed(1) + 'px,' + cy[i].toFixed(1) + 'px)';
         });
-
         requestAnimationFrame(tick);
       }
       tick();
