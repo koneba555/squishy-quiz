@@ -95,28 +95,13 @@
     .quiz-content.fading { opacity: 0; }
 
     /* ── RESULT ── */
-    .result-img-wrap { text-align: center; margin-bottom: 12px; }
+    .result-img-wrap { text-align: center; margin-bottom: 20px; }
     .result-img {
-      width: 160px; height: 160px; object-fit: contain;
+      width: 100%; max-width: 340px; height: auto; object-fit: contain;
       border-radius: 20px;
-      filter: drop-shadow(0 6px 20px var(--shadow, rgba(180,140,210,0.3)));
+      filter: drop-shadow(0 8px 24px var(--shadow, rgba(180,140,210,0.35)));
     }
-    .result-code {
-      display: inline-block; font-family: 'Fredoka', sans-serif;
-      font-size: 13px; letter-spacing: 3px; font-weight: 600;
-      background: var(--soft, #faf6ff); color: var(--ink, #5b3fa0);
-      padding: 4px 14px; border-radius: 20px; margin-bottom: 6px;
-    }
-    .result-header { text-align: center; margin-bottom: 16px; }
-    .result-name {
-      font-family: 'Fredoka', sans-serif; font-size: 32px; font-weight: 600;
-      color: var(--ink, #5b3fa0); margin-bottom: 10px;
-    }
-    .trait-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 14px; }
-    .trait-tag {
-      background: var(--soft, #faf6ff); color: var(--ink, #5b3fa0);
-      border-radius: 20px; padding: 4px 12px; font-size: 13px; font-weight: 500;
-    }
+    .result-code, .result-header, .result-name, .trait-tags, .trait-tag { display: none; }
     .result-desc {
       background: var(--soft, #faf6ff); border-radius: 16px;
       padding: 16px 18px; font-size: 15px; color: #4a3070;
