@@ -6,7 +6,7 @@
   <title>คุณเป็นสกุชชี่แบบไหน?</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Itim&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -14,7 +14,7 @@
       min-height: 100vh;
       background: linear-gradient(135deg, #fce4f3 0%, #e8e0ff 45%, #d4eeff 100%);
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Sarabun', sans-serif;
+      font-family: 'Itim', sans-serif;
       padding: 20px; overflow-x: hidden;
     }
 
@@ -77,8 +77,7 @@
       height: 100%; background: linear-gradient(90deg, #c084fc, #818cf8);
       border-radius: 3px; transition: width 0.35s ease;
     }
-    .q-label { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; color: #b399d4; text-transform: uppercase; margin-bottom: 4px; }
-    .q-dimension { font-size: 13px; color: #c084fc; margin-bottom: 12px; }
+    .q-label, .q-dimension { display: none; }
     .q-text {
       font-family: 'Fredoka', sans-serif; font-size: 22px; font-weight: 500;
       color: #3d2d70; line-height: 1.35; margin-bottom: 20px;
@@ -86,7 +85,7 @@
     .options { display: flex; flex-direction: column; gap: 10px; }
     .option-btn {
       background: #faf6ff; border: 2px solid #ede5ff; border-radius: 14px;
-      padding: 14px 16px; font-family: 'Sarabun', sans-serif; font-size: 15px;
+      padding: 14px 16px; font-family: 'Itim', sans-serif; font-size: 15px;
       color: #5b3fa0; cursor: pointer; text-align: left;
       transition: all 0.18s ease; display: flex; align-items: flex-start;
       gap: 12px; line-height: 1.4;
@@ -144,7 +143,7 @@
     .share-row { display: flex; gap: 8px; margin-bottom: 8px; }
     .btn {
       flex: 1; padding: 13px 10px; border: none; border-radius: 14px;
-      font-family: 'Sarabun', sans-serif; font-size: 14px; font-weight: 600;
+      font-family: 'Itim', sans-serif; font-size: 14px; font-weight: 600;
       cursor: pointer; transition: all 0.18s ease;
     }
     .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
@@ -154,7 +153,7 @@
     .copy-notice { text-align: center; font-size: 13px; color: #c084fc; height: 20px; margin-bottom: 8px; }
     .restart-btn {
       width: 100%; background: none; border: 2px solid #e8e0ff;
-      border-radius: 14px; padding: 13px; font-family: 'Sarabun', sans-serif;
+      border-radius: 14px; padding: 13px; font-family: 'Itim', sans-serif;
       font-size: 14px; color: #8a7aaa; cursor: pointer; transition: all 0.18s ease;
     }
     .restart-btn:hover { border-color: #c084fc; color: #5b3fa0; }
