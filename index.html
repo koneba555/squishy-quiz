@@ -108,6 +108,32 @@
       line-height: 1.75; margin-bottom: 20px;
     }
 
+    /* ── SQUEEZE BUDDIES ── */
+    .buddies-section { margin-bottom: 20px; }
+    .buddies-title {
+      font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: #b399d4; margin-bottom: 10px;
+    }
+    .buddies-row { display: flex; gap: 10px; }
+    .buddy-card {
+      flex: 1; text-align: center; background: #faf6ff;
+      border-radius: 14px; padding: 12px 8px;
+    }
+    .buddy-img {
+      width: 72px; height: 72px; object-fit: contain;
+      border-radius: 10px; margin-bottom: 6px; display: block; margin-left: auto; margin-right: auto;
+    }
+    .buddy-name { font-size: 12px; color: #5b3fa0; font-weight: 600; margin-bottom: 4px; line-height: 1.2; }
+    .buddy-badge {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      padding: 2px 8px; border-radius: 20px; color: white;
+    }
+    .badge-ideal { background: #4a90d9; }
+    .badge-good  { background: #3a8a4a; }
+    .badge-ok    { background: #6ab06a; color: #fff; }
+    .badge-meh   { background: #c8a020; }
+    .badge-hard  { background: #c04040; }
+
     .share-row { display: flex; gap: 8px; margin-bottom: 8px; }
     .btn {
       flex: 1; padding: 13px 10px; border: none; border-radius: 14px;
@@ -170,6 +196,10 @@
         <div class="trait-tags" id="r-traits"></div>
       </div>
       <div class="result-desc" id="r-desc"></div>
+      <div class="buddies-section">
+        <div class="buddies-title">เพื่อนร่วมโดนบีบ</div>
+        <div class="buddies-row" id="r-buddies"></div>
+      </div>
       <div class="share-row">
         <button class="btn btn-primary" onclick="shareResult()">แชร์ผล 🎉</button>
         <button class="btn btn-fb" onclick="shareFb()">f</button>
@@ -456,6 +486,31 @@
       }, 260);
     }
 
+    /* ── COMPATIBILITY ────────────────────────────────────────────── */
+    function compatScore(a, b) {
+      if (a === b) return -1;
+      let s = 0;
+      if (a[0] === b[0]) s += 2; // Energy
+      if (a[3] === b[3]) s += 2; // Style
+      if (a[1] === b[1]) s += 1; // Relationship
+      if (a[2] === b[2]) s += 1; // Decision
+      return s;
+    }
+    function compatInfo(score) {
+      if (score >= 5) return { label: 'คู่บีบในฝัน', cls: 'badge-ideal' };
+      if (score >= 4) return { label: 'บีบกันได้ดี', cls: 'badge-good' };
+      if (score >= 3) return { label: 'ลองดูได้', cls: 'badge-ok' };
+      if (score >= 2) return { label: 'อาจเหนื่อย', cls: 'badge-meh' };
+      return { label: 'โดนบีบยาก', cls: 'badge-hard' };
+    }
+    function topBuddies(code, n) {
+      return Object.keys(TYPES)
+        .map(k => ({ code: k, score: compatScore(code, k) }))
+        .filter(x => x.score >= 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, n);
+    }
+
     function showResult() {
       resultCode = computeCode();
       const t = TYPES[resultCode];
@@ -471,6 +526,18 @@
       document.getElementById('r-traits').innerHTML =
         t.traits.map(tr => '<span class="trait-tag">' + tr + '</span>').join('');
       document.getElementById('r-desc').textContent = t.desc;
+
+      const buddies = topBuddies(resultCode, 3);
+      document.getElementById('r-buddies').innerHTML = buddies.map(b => {
+        const bt = TYPES[b.code];
+        const ci = compatInfo(b.score);
+        return '<div class="buddy-card">' +
+          '<img class="buddy-img" src="' + bt.image + '" alt="' + bt.name + '">' +
+          '<div class="buddy-name">' + bt.name + '</div>' +
+          '<span class="buddy-badge ' + ci.cls + '">' + ci.label + '</span>' +
+          '</div>';
+      }).join('');
+
       document.getElementById('progress-fill').style.width = '100%';
       showScreen('result');
     }
