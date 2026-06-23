@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Itim&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -573,24 +574,55 @@
       return 'ฉันเป็น ' + t.name + ' ในควิซ "คุณเป็นสกุชชี่แบบไหน?" 🧁 — ' + t.tagline + ' แล้วคุณล่ะ? ' + window.location.href;
     }
 
-    async function getShareFile() {
+    let shareFileCache = null;
+
+    // Capture the whole result card (image + desc + buddies) as one PNG file.
+    async function captureCard() {
       const t = TYPES[resultCode];
-      const res = await fetch(t.image);
-      const blob = await res.blob();
-      return new File([blob], t.name + '.png', { type: blob.type || 'image/png' });
+      const card = document.querySelector('.card');
+      const hideEls = card.querySelectorAll('.share-row, .copy-notice, .restart-btn');
+
+      if (typeof html2canvas !== 'function') {
+        // Fallback: just the squishy image
+        const res = await fetch(t.image);
+        const blob = await res.blob();
+        return new File([blob], t.name + '.png', { type: blob.type || 'image/png' });
+      }
+
+      hideEls.forEach(e => e.style.display = 'none');
+      let canvas;
+      try {
+        canvas = await html2canvas(card, { backgroundColor: '#ffffff', scale: 2, useCORS: true, logging: false });
+      } finally {
+        hideEls.forEach(e => e.style.display = '');
+      }
+      const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+      return new File([blob], t.name + '.png', { type: 'image/png' });
+    }
+
+    function setShareBusy(msg) {
+      const n = document.getElementById('copy-notice');
+      n.textContent = msg || '';
     }
 
     async function shareResult() {
+      setShareBusy('กำลังสร้างรูป...');
       try {
-        const file = await getShareFile();
+        const file = await captureCard();
+        setShareBusy('');
         if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({ files: [file], title: 'คุณเป็นสกุชชี่แบบไหน?', text: shareText() });
           return;
         }
-      } catch(e) {}
-      if (navigator.share) {
-        navigator.share({ title: 'คุณเป็นสกุชชี่แบบไหน?', text: shareText(), url: window.location.href }).catch(() => {});
-      } else { shareFb(); }
+        // No file-share support: download the image instead
+        downloadFile(file);
+        setShareBusy('✓ บันทึกรูปแล้ว เอาไปแชร์ได้เลย');
+        setTimeout(() => setShareBusy(''), 3000);
+      } catch(e) {
+        setShareBusy('');
+        if (navigator.share) navigator.share({ title: 'คุณเป็นสกุชชี่แบบไหน?', text: shareText(), url: window.location.href }).catch(() => {});
+        else shareFb();
+      }
     }
 
     function shareFb() {
@@ -598,18 +630,29 @@
     }
 
     async function shareIg() {
+      setShareBusy('กำลังสร้างรูป...');
       try {
-        const file = await getShareFile();
+        const file = await captureCard();
+        setShareBusy('');
         if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({ files: [file], title: 'คุณเป็นสกุชชี่แบบไหน?' });
           return;
         }
-      } catch(e) {}
+        downloadFile(file);
+      } catch(e) { setShareBusy(''); }
       try { if (navigator.clipboard) await navigator.clipboard.writeText(shareText()); } catch(e) {}
-      const n = document.getElementById('copy-notice');
-      n.textContent = '✓ คัดลอกแล้ว! เปิด IG แล้ววางในสตอรี่';
-      setTimeout(() => n.textContent = '', 3000);
+      setShareBusy('✓ บันทึกรูป + คัดลอกข้อความแล้ว เปิด IG วางในสตอรี่ได้เลย');
+      setTimeout(() => setShareBusy(''), 4000);
       window.open('https://www.instagram.com/', '_blank');
+    }
+
+    function downloadFile(file) {
+      const url = URL.createObjectURL(file);
+      const a = document.createElement('a');
+      a.href = url; a.download = file.name;
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
 
     /* ── CLOUD BACKGROUND (gooey metaball) ───────────────────────── */
