@@ -12,35 +12,23 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(135deg, #fce4f3 0%, #e8e0ff 40%, #d4eeff 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: linear-gradient(135deg, #fce4f3 0%, #e8e0ff 45%, #d4eeff 100%);
+      display: flex; align-items: center; justify-content: center;
       font-family: 'Sarabun', sans-serif;
-      padding: 20px;
-      overflow-x: hidden;
+      padding: 20px; overflow-x: hidden;
     }
 
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      opacity: 0.35;
-      pointer-events: none;
-    }
+    .blob { position: fixed; border-radius: 50%; opacity: 0.35; pointer-events: none; }
     .blob-1 { width: 320px; height: 320px; background: radial-gradient(circle, #ffb3d9, transparent); top: -90px; left: -90px; }
     .blob-2 { width: 360px; height: 360px; background: radial-gradient(circle, #b3c6ff, transparent); bottom: -110px; right: -110px; }
     .blob-3 { width: 240px; height: 240px; background: radial-gradient(circle, #c8f0d4, transparent); top: 25%; right: -60px; }
     .blob-4 { width: 200px; height: 200px; background: radial-gradient(circle, #ffe4b3, transparent); bottom: 25%; left: -50px; }
 
     .card {
-      background: white;
-      border-radius: 28px;
-      padding: 40px 36px;
-      max-width: 480px;
-      width: 100%;
+      background: white; border-radius: 28px;
+      padding: 40px 36px; max-width: 480px; width: 100%;
       box-shadow: 0 8px 40px rgba(180, 140, 210, 0.18);
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
     }
 
     .screen { display: none; }
@@ -49,111 +37,56 @@
     /* ── WELCOME ── */
     .welcome-icon { font-size: 64px; text-align: center; margin-bottom: 12px; line-height: 1; }
     .welcome-subtitle {
-      text-align: center;
-      font-family: 'Fredoka', sans-serif;
-      font-size: 13px;
-      letter-spacing: 2px;
-      color: #d17fb0;
-      text-transform: uppercase;
-      margin-bottom: 8px;
+      text-align: center; font-family: 'Fredoka', sans-serif;
+      font-size: 13px; letter-spacing: 2px; color: #d17fb0;
+      text-transform: uppercase; margin-bottom: 8px;
     }
     .welcome-title {
-      text-align: center;
-      font-family: 'Fredoka', sans-serif;
-      font-size: 34px;
-      font-weight: 600;
-      color: #5b3fa0;
-      line-height: 1.2;
-      margin-bottom: 18px;
+      text-align: center; font-family: 'Fredoka', sans-serif;
+      font-size: 34px; font-weight: 600; color: #5b3fa0;
+      line-height: 1.2; margin-bottom: 18px;
     }
     .intro-box {
-      background: #faf6ff;
-      border-radius: 16px;
-      padding: 16px 18px;
-      margin-bottom: 20px;
-      font-size: 15px;
-      color: #7c6ea0;
-      line-height: 1.75;
+      background: #faf6ff; border-radius: 16px;
+      padding: 16px 18px; margin-bottom: 20px;
+      font-size: 15px; color: #7c6ea0; line-height: 1.75;
     }
-    .welcome-desc {
-      text-align: center;
-      color: #8a7aaa;
-      font-size: 14px;
-      margin-bottom: 28px;
-    }
+    .welcome-desc { text-align: center; color: #8a7aaa; font-size: 14px; margin-bottom: 28px; }
     .start-btn {
-      width: 100%;
-      background: linear-gradient(135deg, #d186c8, #9b72e8);
-      color: white;
-      border: none;
-      border-radius: 16px;
-      padding: 16px;
-      font-family: 'Fredoka', sans-serif;
-      font-size: 20px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      width: 100%; background: linear-gradient(135deg, #d186c8, #9b72e8);
+      color: white; border: none; border-radius: 16px; padding: 16px;
+      font-family: 'Fredoka', sans-serif; font-size: 20px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s ease;
       box-shadow: 0 4px 20px rgba(155, 114, 232, 0.35);
     }
     .start-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(155, 114, 232, 0.45); }
 
     /* ── QUIZ ── */
     .progress-bar {
-      width: 100%; height: 6px;
-      background: #f0e8ff;
-      border-radius: 3px;
-      margin-bottom: 24px;
-      overflow: hidden;
+      width: 100%; height: 6px; background: #f0e8ff;
+      border-radius: 3px; margin-bottom: 24px; overflow: hidden;
     }
     .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #c084fc, #818cf8);
-      border-radius: 3px;
-      transition: width 0.35s ease;
+      height: 100%; background: linear-gradient(90deg, #c084fc, #818cf8);
+      border-radius: 3px; transition: width 0.35s ease;
     }
-    .q-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      color: #b399d4;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .q-dimension {
-      font-size: 13px;
-      color: #c084fc;
-      margin-bottom: 12px;
-    }
+    .q-label { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; color: #b399d4; text-transform: uppercase; margin-bottom: 4px; }
+    .q-dimension { font-size: 13px; color: #c084fc; margin-bottom: 12px; }
     .q-text {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 22px;
-      font-weight: 500;
-      color: #3d2d70;
-      line-height: 1.35;
-      margin-bottom: 20px;
+      font-family: 'Fredoka', sans-serif; font-size: 22px; font-weight: 500;
+      color: #3d2d70; line-height: 1.35; margin-bottom: 20px;
     }
     .options { display: flex; flex-direction: column; gap: 10px; }
     .option-btn {
-      background: #faf6ff;
-      border: 2px solid #ede5ff;
-      border-radius: 14px;
-      padding: 14px 16px;
-      font-family: 'Sarabun', sans-serif;
-      font-size: 15px;
-      color: #5b3fa0;
-      cursor: pointer;
-      text-align: left;
-      transition: all 0.18s ease;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      line-height: 1.4;
+      background: #faf6ff; border: 2px solid #ede5ff; border-radius: 14px;
+      padding: 14px 16px; font-family: 'Sarabun', sans-serif; font-size: 15px;
+      color: #5b3fa0; cursor: pointer; text-align: left;
+      transition: all 0.18s ease; display: flex; align-items: flex-start;
+      gap: 12px; line-height: 1.4;
     }
     .option-btn:hover {
-      background: #f0e8ff;
-      border-color: #c084fc;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(192, 132, 252, 0.2);
+      background: #f0e8ff; border-color: #c084fc;
+      transform: translateY(-1px); box-shadow: 0 4px 16px rgba(192, 132, 252, 0.2);
     }
     .option-btn:active { transform: translateY(0); }
     .opt-emoji { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
@@ -162,79 +95,49 @@
     .quiz-content.fading { opacity: 0; }
 
     /* ── RESULT ── */
-    .result-header { text-align: center; margin-bottom: 18px; }
-    .result-emoji { font-size: 72px; display: block; margin-bottom: 10px; }
-    .result-label {
-      font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--ink, #5b3fa0);
-      opacity: 0.7; margin-bottom: 6px;
-    }
-    .result-name {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 30px; font-weight: 600;
-      color: var(--ink, #5b3fa0);
-      margin-bottom: 4px;
-    }
-    .result-tagline { font-size: 14px; color: #8a7aaa; }
-
-    .result-desc {
-      background: var(--soft, #faf6ff);
-      border-radius: 16px;
-      padding: 16px 18px;
-      font-size: 15px;
-      color: #5b3fa0;
-      line-height: 1.75;
-      margin-bottom: 18px;
-    }
-
-    .section-title {
-      font-size: 12px; font-weight: 600;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: #b399d4; margin-bottom: 8px;
-    }
-    .strength-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
-    .strength-tag {
-      background: var(--soft, #faf6ff);
-      border: 1.5px solid #e8e0ff;
+    .result-img-wrap { text-align: center; margin-bottom: 12px; }
+    .result-img {
+      width: 160px; height: 160px; object-fit: contain;
       border-radius: 20px;
-      padding: 4px 12px;
-      font-size: 13px;
-      color: var(--ink, #5b3fa0);
+      filter: drop-shadow(0 6px 20px var(--shadow, rgba(180,140,210,0.3)));
     }
-
-    .besties { display: flex; gap: 12px; margin-bottom: 22px; }
-    .bestie {
-      flex: 1; background: var(--soft, #faf6ff);
-      border-radius: 14px; padding: 14px;
-      text-align: center;
+    .result-code {
+      display: inline-block; font-family: 'Fredoka', sans-serif;
+      font-size: 13px; letter-spacing: 3px; font-weight: 600;
+      background: var(--soft, #faf6ff); color: var(--ink, #5b3fa0);
+      padding: 4px 14px; border-radius: 20px; margin-bottom: 6px;
     }
-    .bestie-emoji { font-size: 28px; display: block; margin-bottom: 5px; }
-    .bestie-name { font-size: 13px; color: var(--ink, #5b3fa0); line-height: 1.3; }
+    .result-header { text-align: center; margin-bottom: 16px; }
+    .result-name {
+      font-family: 'Fredoka', sans-serif; font-size: 32px; font-weight: 600;
+      color: var(--ink, #5b3fa0); margin-bottom: 10px;
+    }
+    .trait-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 14px; }
+    .trait-tag {
+      background: var(--soft, #faf6ff); color: var(--ink, #5b3fa0);
+      border-radius: 20px; padding: 4px 12px; font-size: 13px; font-weight: 500;
+    }
+    .result-desc {
+      background: var(--soft, #faf6ff); border-radius: 16px;
+      padding: 16px 18px; font-size: 15px; color: #4a3070;
+      line-height: 1.75; margin-bottom: 20px;
+    }
 
     .share-row { display: flex; gap: 8px; margin-bottom: 8px; }
     .btn {
-      flex: 1; padding: 13px 10px;
-      border: none; border-radius: 14px;
-      font-family: 'Sarabun', sans-serif;
-      font-size: 14px; font-weight: 600;
-      cursor: pointer;
-      transition: all 0.18s ease;
+      flex: 1; padding: 13px 10px; border: none; border-radius: 14px;
+      font-family: 'Sarabun', sans-serif; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: all 0.18s ease;
     }
     .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
     .btn-primary { background: linear-gradient(135deg, #c084fc, #818cf8); color: white; }
     .btn-fb { background: #1877f2; color: white; flex: none; padding: 13px 18px; font-size: 16px; }
-    .btn-ig {
-      background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
-      color: white; flex: none; padding: 13px 16px;
-    }
-    .copy-notice { text-align: center; font-size: 13px; color: #c084fc; height: 20px; margin-bottom: 10px; }
+    .btn-ig { background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af); color: white; flex: none; padding: 13px 16px; }
+    .copy-notice { text-align: center; font-size: 13px; color: #c084fc; height: 20px; margin-bottom: 8px; }
     .restart-btn {
-      width: 100%; background: none;
-      border: 2px solid #e8e0ff;
-      border-radius: 14px; padding: 13px;
-      font-family: 'Sarabun', sans-serif;
-      font-size: 14px; color: #8a7aaa;
-      cursor: pointer; transition: all 0.18s ease;
+      width: 100%; background: none; border: 2px solid #e8e0ff;
+      border-radius: 14px; padding: 13px; font-family: 'Sarabun', sans-serif;
+      font-size: 14px; color: #8a7aaa; cursor: pointer; transition: all 0.18s ease;
     }
     .restart-btn:hover { border-color: #c084fc; color: #5b3fa0; }
   </style>
@@ -254,7 +157,7 @@
       <div class="intro-box">
         วันนี้คุณสะดุดประตูมิติโดยไม่ได้ตั้งใจ และตอนนี้กำลังยืนอยู่หน้าทางเข้าดินแดนเวทมนตร์ ไม่มีแผนที่ ไม่มี GPS แต่ก็ไม่เป็นไร... มาดูกันว่าคุณเป็นสกุชชี่แบบไหน
       </div>
-      <div class="welcome-desc">8 คำถามสั้นๆ · หนึ่งสกุชชี่ในดวงใจ ✨</div>
+      <div class="welcome-desc">8 คำถาม · 4 มิติ · 16 สกุชชี่ ✨</div>
       <button class="start-btn" onclick="startQuiz()">เริ่มเลย →</button>
     </div>
 
@@ -273,17 +176,15 @@
 
     <!-- RESULT -->
     <div class="screen" id="screen-result">
+      <div class="result-img-wrap">
+        <img id="r-img" src="" alt="" class="result-img">
+      </div>
       <div class="result-header">
-        <span class="result-emoji" id="r-emoji"></span>
-        <div class="result-label">คุณคือ...</div>
+        <div class="result-code" id="r-code"></div>
         <div class="result-name" id="r-name"></div>
-        <div class="result-tagline" id="r-tagline"></div>
+        <div class="trait-tags" id="r-traits"></div>
       </div>
       <div class="result-desc" id="r-desc"></div>
-      <div class="section-title">จุดแข็ง</div>
-      <div class="strength-tags" id="r-strengths"></div>
-      <div class="section-title">เพื่อนสนิท</div>
-      <div class="besties" id="r-besties"></div>
       <div class="share-row">
         <button class="btn btn-primary" onclick="shareResult()">แชร์ผล 🎉</button>
         <button class="btn btn-fb" onclick="shareFb()">f</button>
@@ -295,139 +196,243 @@
   </div>
 
   <script>
+    /* ── 16 TYPES ─────────────────────────────────────────────────── */
     const TYPES = {
-      alpaca: {
-        key: 'alpaca', emoji: '🦙', name: 'อัลปาก้าผู้อ่อนโยน',
-        tagline: 'อบอุ่น · เงียบสงบ · ใจดี',
-        soft: '#F0FFF4', ink: '#3A7A52',
-        description: 'คุณคือพื้นที่ปลอดภัยที่คนรอบข้างอยากวิ่งเข้าหา อบอุ่น เงียบสงบ และมีพลังเยียวยาที่ไม่ต้องพูดอะไรมาก แค่อยู่ใกล้คุณก็รู้สึกดีขึ้นแล้ว คุณสังเกตเห็นสิ่งเล็กน้อยที่คนอื่นมองข้าม และดูแลคนรอบข้างด้วยหัวใจที่ใหญ่กว่าตัว',
-        strengths: ['เป็นที่พึ่งได้', 'หัวใจอ่อนโยน', 'ฟังเก่ง', 'พลังเยียวยา'],
-        besties: ['mochi', 'panda']
+      BWSS: {
+        name: 'ขนมปัง', image: 'asset/ขนมปัง.png',
+        traits: ['สดใส', 'อบอุ่น', 'ใจอ่อน', 'หวาน'],
+        tagline: 'คนที่ทุกคนรัก',
+        desc: 'คุณคืออบอุ่นที่แท้จริง ยิ้มง่าย พูดง่าย และทำให้คนรอบข้างรู้สึกปลอดภัยโดยไม่ต้องพยายาม คุณเป็นคนที่ทุกคนอยากอยู่ใกล้ๆ เพราะแค่อยู่ด้วยกันก็อุ่นแล้ว',
+        soft: '#FFF8E7', ink: '#9B6B00'
       },
-      strawberry: {
-        key: 'strawberry', emoji: '🍓', name: 'สตรอว์เบอร์รี่หอมหวาน',
-        tagline: 'สดใส · กล้า · ดึงดูดทุกคน',
-        soft: '#FFF0F3', ink: '#C04070',
-        description: 'คุณคือแสงไฟที่ทำให้ทุกที่สว่างขึ้น พลังงานสดใส กล้าตัดสินใจ และมีเสน่ห์ดึงดูดคนได้โดยไม่ต้องพยายาม เพื่อนของคุณรู้ว่าถ้าอยู่กับคุณ วันธรรมดาจะกลายเป็นวันที่จำได้ตลอดชีวิต',
-        strengths: ['พลังงานเต็ม', 'กล้าลุย', 'เป็นศูนย์กลาง', 'ดึงดูดทุกคน'],
-        besties: ['alpaca', 'mochi']
+      BWSU: {
+        name: 'สตรอว์เบอร์รี่', image: 'asset/สตรอว์เบอร์รี่.png',
+        traits: ['สดใส', 'อบอุ่น', 'ใจอ่อน', 'เป็นตัวเอง'],
+        tagline: 'น่ารักมีสีสัน',
+        desc: 'สดใส อบอุ่น แต่มีสไตล์เป็นตัวเอง คุณดึงดูดคนด้วยความแปลกเล็กๆ ที่น่ารัก ใจดีและเปิดรับ แต่ก็ไม่ยอมเป็นแค่ background ของใคร',
+        soft: '#FFF0F3', ink: '#B03060'
       },
-      panda: {
-        key: 'panda', emoji: '🐼', name: 'แพนด้ากาแล็กซี่',
-        tagline: 'ฝัน · สร้างสรรค์ · ลึกลับ',
-        soft: '#F3EEFF', ink: '#6040A0',
-        description: 'หัวใจคุณเป็นกาแล็กซี่ที่เต็มไปด้วยไอเดียและความฝัน ชอบสังเกตโลกในมุมที่คนอื่นมองไม่เห็น รู้สึกลึก ฝันไกล และมีความลึกลับที่ทำให้คนอยากรู้จักคุณมากขึ้นเรื่อยๆ คุณสร้างสรรค์สิ่งสวยงามจากสิ่งที่คนอื่นมองผ่าน',
-        strengths: ['จินตนาการสูง', 'สร้างสรรค์', 'รู้สึกลึก', 'มองต่างมุม'],
-        besties: ['alpaca', 'strawberry']
+      BWBS: {
+        name: 'โดนัท', image: 'asset/โดนัท.png',
+        traits: ['สดใส', 'อบอุ่น', 'มั่นใจ', 'หวาน'],
+        tagline: 'ชอบเป็นดาวเด่น',
+        desc: 'พลังงานสูง อบอุ่น และกล้าแสดงออก คุณมักจะเป็นคนที่ทุกคนจดจำ เดินเข้ามาก็สว่างทั้งห้อง และยังใจดีพอที่จะดึงคนอื่นขึ้นมาด้วยกัน',
+        soft: '#FFF3EE', ink: '#C0500A'
       },
-      mochi: {
-        key: 'mochi', emoji: '🐱', name: 'โมจิมินิน่ารัก',
-        tagline: 'เล่นสนุก · ยืดหยุ่น · น่ากอด',
-        soft: '#FFF7ED', ink: '#B06020',
-        description: 'จิ๋วแต่แจ๋ว ยืดหยุ่นและกระเด้งกลับจากทุกอย่างได้เสมอ คุณหาความสนุกได้ในทุกสถานการณ์ ไม่ยึดติด ไม่ดราม่า แค่ flow ไปกับชีวิตแล้วทุกอย่างก็ออกมาน่ารักเอง ทุกคนอยากเก็บคุณใส่กระเป๋าไว้ด้วย',
-        strengths: ['ยืดหยุ่นสูง', 'หาความสนุกได้เสมอ', 'ไม่ดราม่า', 'น่ารักไม่ตั้งใจ'],
-        besties: ['strawberry', 'alpaca']
+      BWBU: {
+        name: 'เลมอน', image: 'asset/เลมอน.png',
+        traits: ['สดใส', 'อบอุ่น', 'มั่นใจ', 'เป็นตัวเอง'],
+        tagline: 'พูดตรง ฮา',
+        desc: 'สดใส อบอุ่น มั่นใจ และเป็นตัวเอง 100% คุณไม่เสแสร้ง พูดตรงและฮาตรง แต่ก็ทำด้วยความรักและไม่เคยทำให้ใครเจ็บโดยไม่จำเป็น',
+        soft: '#FFFDE7', ink: '#8B7000'
+      },
+      BCSS: {
+        name: 'มาร์ชเมลโล่', image: 'asset/มาร์ชเมลโล่.png',
+        traits: ['สดใส', 'เป็นตัวเอง', 'ใจอ่อน', 'หวาน'],
+        tagline: 'ฝันหวาน ไม่แคร์โลก',
+        desc: 'คุณสดใส ฝันเยอะ ใจอ่อน และอยู่ในโลกของตัวเองเป็นส่วนใหญ่ เสน่ห์ของคุณคือความ carefree ที่ทำให้คนอยากเอาใจช่วย',
+        soft: '#F5F0FF', ink: '#7040B0'
+      },
+      BCSU: {
+        name: 'มะม่วง', image: 'asset/มะม่วง.png',
+        traits: ['สดใส', 'เป็นตัวเอง', 'ใจอ่อน', 'แปลก'],
+        tagline: 'คริเอทีฟ ชอบทำอะไรใหม่',
+        desc: 'สดใส เป็นตัวเอง และมีความคิดสร้างสรรค์สูงมาก คุณเบื่อง่ายกับสิ่งเดิมๆ และตื่นเต้นกับไอเดียใหม่ตลอดเวลา ชีวิตคุณไม่เคยน่าเบื่อ',
+        soft: '#FFF5E0', ink: '#B07000'
+      },
+      BCBS: {
+        name: 'เค้ก', image: 'asset/เค้ก.png',
+        traits: ['สดใส', 'เป็นตัวเอง', 'มั่นใจ', 'หวาน'],
+        tagline: 'มั่นใจ ชอบความสนุก',
+        desc: 'สดใส เป็นตัวเอง และ bold มาก คุณสนุกกับชีวิตแบบไม่ต้องง้อใคร มีพลังงานเกร็งๆ ที่ทำให้คนอยากเดินตาม',
+        soft: '#FFF0F5', ink: '#B04080'
+      },
+      BCBU: {
+        name: 'อุนจิ', image: 'asset/อุนจิ.png',
+        traits: ['สดใส', 'เป็นตัวเอง', 'มั่นใจ', 'แปลก'],
+        tagline: 'ไม่แคร์ใคร ฮามาก',
+        desc: 'คุณสดใส มั่นใจ เป็นตัวเอง และอยู่นอกกรอบทุกอย่าง ใครคิดว่าคุณแปลก คุณก็แค่ยิ้มและเดินต่อ นั่นคือพลังสูงสุดของคุณ',
+        soft: '#F5F0E8', ink: '#7A5028'
+      },
+      CWSS: {
+        name: 'ซาลาเปา', image: 'asset/ซาลาเปา.png',
+        traits: ['เงียบ', 'อบอุ่น', 'ใจอ่อน', 'หวาน'],
+        tagline: 'นุ่มนวล ใส่ใจคนรอบข้าง',
+        desc: 'เงียบ อบอุ่น ใจอ่อน และหวาน คุณเป็นคนที่ทุกคนอยากพักพิงด้วย สังเกตเห็นสิ่งเล็กน้อยที่คนอื่นมองผ่าน และดูแลคนรอบข้างด้วยหัวใจที่ใหญ่มาก',
+        soft: '#FFFBF5', ink: '#B07A30'
+      },
+      CWSU: {
+        name: 'ชีส', image: 'asset/ชีส.png',
+        traits: ['เงียบ', 'อบอุ่น', 'ใจอ่อน', 'เป็นตัวเอง'],
+        tagline: 'ลึกซึ้ง เลือกคบ',
+        desc: 'เงียบ อบอุ่น และมีสไตล์เป็นตัวเอง คุณไม่เปิดใจง่าย แต่เมื่อเปิดแล้วคือความสัมพันธ์ที่ลึกและจริงใจมาก คนที่เข้าถึงคุณได้จะรู้ว่าคุ้มมาก',
+        soft: '#FFFDE7', ink: '#9A7500'
+      },
+      CWBS: {
+        name: 'โมจิ', image: 'asset/โมจิ.png',
+        traits: ['เงียบ', 'อบอุ่น', 'มั่นใจ', 'หวาน'],
+        tagline: 'สงบแต่มีหลักการ',
+        desc: 'เงียบ อบอุ่น และมั่นใจในตัวเองอย่างเงียบๆ คุณดูสงบแต่รู้ว่าต้องการอะไรในชีวิต ไม่ต้องพิสูจน์ตัวเองให้ใคร เพราะที่คุณเป็นนั้นพอแล้ว',
+        soft: '#EDFFF5', ink: '#2A7048'
+      },
+      CWBU: {
+        name: 'ทุเรียน', image: 'asset/ทุเรียน.png',
+        traits: ['เงียบ', 'อบอุ่น', 'มั่นใจ', 'แปลก'],
+        tagline: 'ภักดี แต่ต้องทำความรู้จักก่อน',
+        desc: 'เงียบ อบอุ่น แต่มีกำแพงบางๆ ที่ต้องเจาะให้ได้ก่อน เมื่อใครเข้าถึงคุณได้จริงๆ จะพบว่าคุณภักดีและเป็นของแท้ที่หาที่ไหนไม่ได้',
+        soft: '#EDFFF0', ink: '#2A6020'
+      },
+      CCSS: {
+        name: 'เนยแท่ง', image: 'asset/เนยแท่ง.png',
+        traits: ['เงียบ', 'เป็นตัวเอง', 'ใจอ่อน', 'หวาน'],
+        tagline: 'ชิลสุด อยู่บ้านก็แฮปปี้',
+        desc: 'เงียบ เป็นตัวเอง ชอบ comfort zone ของตัวเอง และไม่ต้องการอะไรมากนอกจากความสบาย คุณคือผู้เชี่ยวชาญด้านการพักผ่อนและมีความสุขในแบบเรียบง่าย',
+        soft: '#FFFDE7', ink: '#9A7500'
+      },
+      CCSU: {
+        name: 'มัทฉะ', image: 'asset/มัทฉะ.png',
+        traits: ['เงียบ', 'เป็นตัวเอง', 'ใจอ่อน', 'แปลก'],
+        tagline: 'มีสไตล์ เลือกละเอียด',
+        desc: 'เงียบ เป็นตัวเอง และมีรสนิยมสูงมาก คุณเลือกทุกอย่างในชีวิตอย่างพิถีพิถัน ไม่ตามเทรนด์ แต่ตั้งเทรนด์ของตัวเองและคนอื่นอาจตามมาทีหลัง',
+        soft: '#EDFFF5', ink: '#2A6040'
+      },
+      CCBS: {
+        name: 'เยลลี่หมี', image: 'asset/เยลลี่หมี.png',
+        traits: ['เงียบ', 'เป็นตัวเอง', 'มั่นใจ', 'หวาน'],
+        tagline: 'cute แต่ไม่ง้อใคร',
+        desc: 'น่ารักมากแต่ก็แข็งแกร่งในแบบของตัวเอง คุณเงียบ เป็นตัวเอง มั่นใจ และไม่ต้องการการยืนยันจากใคร คนที่คิดว่าคุณอ่อนแอนั้นเข้าใจผิดอย่างมาก',
+        soft: '#FFF3EE', ink: '#C04830'
+      },
+      CCBU: {
+        name: 'ช็อกโกแลต', image: 'asset/ช็อกโกแลต.png',
+        traits: ['เงียบ', 'เป็นตัวเอง', 'มั่นใจ', 'แปลก'],
+        tagline: 'ดาร์ก ลึก มีเสน่ห์',
+        desc: 'คุณดึงดูดคนด้วยความลึกลับที่หาตัวจับยาก เงียบ มั่นใจ และไม่เหมือนใครเลย คนที่รู้จักคุณจริงๆ จะรู้ว่ามีอะไรซ่อนอยู่ข้างในมากกว่าที่เห็น',
+        soft: '#F5EEE5', ink: '#6B3820'
       }
     };
 
+    /* ── QUESTIONS ────────────────────────────────────────────────── */
+    /*
+      dim: 'E'=Energy, 'R'=Relationship, 'D'=Decision, 'S'=Style
+      val: for E → 'B'(Bubbly)/'C'(Chill)
+           for R → 'W'(Warm)/'C'(Cool)
+           for D → 'S'(Soft)/'B'(Bold)
+           for S → 'S'(Sweet)/'U'(Unique)
+    */
     const QUESTIONS = [
       {
         label: 'ข้อ 1 — เลือกดินแดน', dimension: '🌟 วัด พลังงาน',
         text: 'หน้าคุณมีทางเข้า 4 ดินแดน จะเลือกไหน?',
         options: [
-          { emoji: '🌈', text: 'ดินแดนสายรุ้ง มีเสียงดนตรีลอยออกมา ดูสนุกมาก', type: 'strawberry' },
-          { emoji: '🌸', text: 'ดินแดนดอกไม้ กลีบดอกปลิวมาเบาๆ รู้สึกสงบ', type: 'alpaca' },
-          { emoji: '🍄', text: 'ดินแดนเห็ดยักษ์ ดูแปลกดี ไม่รู้ข้างในมีอะไร', type: 'mochi' },
-          { emoji: '🌊', text: 'ดินแดนหมอกทะเล เงียบ เย็น และลึกลับนิดๆ', type: 'panda' }
+          { emoji: '🌈', text: 'ดินแดนสายรุ้ง มีเสียงดนตรีลอยออกมา ดูสนุกมาก', dim: 'E', val: 'B' },
+          { emoji: '🌸', text: 'ดินแดนดอกไม้ กลีบดอกปลิวมาเบาๆ รู้สึกสงบ', dim: 'E', val: 'C' },
+          { emoji: '🍄', text: 'ดินแดนเห็ดยักษ์ ดูแปลกดี ไม่รู้ข้างในมีอะไร', dim: 'E', val: 'B' },
+          { emoji: '🌊', text: 'ดินแดนหมอกทะเล เงียบ เย็น และลึกลับนิดๆ', dim: 'E', val: 'C' }
         ]
       },
       {
         label: 'ข้อ 2 — สัมผัสพื้น', dimension: '✨ วัด สไตล์',
         text: 'ก้าวแรกที่เหยียบเข้าไป พื้นใต้เท้ารู้สึกยังไง?',
         options: [
-          { emoji: '🍰', text: 'นุ่มฟูแบบสปันจ์เค้ก อุ่นๆ หอมๆ', type: 'mochi' },
-          { emoji: '☁️', text: 'เหมือนเหยียบเมฆ เบาจนแทบลอย', type: 'alpaca' },
-          { emoji: '🍮', text: 'หยุ่นๆ แบบพุดดิ้ง กระเด้งนิดๆ', type: 'strawberry' },
-          { emoji: '🌿', text: 'เย็นและแปลก เหมือนเดินบนผักชีทะเล', type: 'panda' }
+          { emoji: '🍰', text: 'นุ่มฟูแบบสปันจ์เค้ก อุ่นๆ หอมๆ', dim: 'S', val: 'S' },
+          { emoji: '☁️', text: 'เหมือนเหยียบเมฆ เบาจนแทบลอย', dim: 'S', val: 'S' },
+          { emoji: '🍮', text: 'หยุ่นๆ แบบพุดดิ้ง กระเด้งนิดๆ', dim: 'S', val: 'U' },
+          { emoji: '🌿', text: 'เย็นและแปลก เหมือนเดินบนผักชีทะเล', dim: 'S', val: 'U' }
         ]
       },
       {
         label: 'ข้อ 3 — เจอหลุม', dimension: '🎯 วัด การตัดสินใจ',
         text: 'เดินไปได้สักพัก อยู่ดีๆ มีหลุมสกุชชี่โผล่ขึ้นมาตรงหน้า จะทำยังไง?',
         options: [
-          { emoji: '🛑', text: 'หยุดก่อน ดูว่าข้างในมีอะไร แล้วค่อยตัดสินใจ', type: 'alpaca' },
-          { emoji: '📸', text: 'ถ่ายรูปไว้ก่อน เผื่อมีคนอยากดู', type: 'mochi' },
-          { emoji: '🪂', text: 'กระโดดลงไปเลย ไม่งั้นจะไม่รู้ว่ามีอะไร', type: 'strawberry' },
-          { emoji: '🏃', text: 'เดินอ้อมไปก่อนแล้วกลับมาดูทีหลัง', type: 'panda' }
+          { emoji: '🛑', text: 'หยุดก่อน ดูว่าข้างในมีอะไร แล้วค่อยตัดสินใจ', dim: 'D', val: 'S' },
+          { emoji: '📸', text: 'ถ่ายรูปไว้ก่อน เผื่อมีคนอยากดู', dim: 'D', val: 'S' },
+          { emoji: '🪂', text: 'กระโดดลงไปเลย ไม่งั้นจะไม่รู้ว่ามีอะไร', dim: 'D', val: 'B' },
+          { emoji: '🏃', text: 'เดินอ้อมไปก่อนแล้วกลับมาดูทีหลัง', dim: 'D', val: 'B' }
         ]
       },
       {
         label: 'ข้อ 4 — เจอกลิ่น', dimension: '✨ วัด สไตล์',
         text: 'กลิ่นลึกลับลอยมา 4 ทิศ จมูกคุณดึงไปทางไหน?',
         options: [
-          { emoji: '🍯', text: 'กลิ่นน้ำผึ้งอุ่นๆ หอมหวานแบบรู้สึกปลอดภัย', type: 'alpaca' },
-          { emoji: '🍓', text: 'กลิ่นสตรอว์เบอร์รี่สด จี๊ดนิดๆ สดชื่น', type: 'strawberry' },
-          { emoji: '🌺', text: 'กลิ่นดอกไม้แปลกๆ ที่ไม่รู้จักชื่อ', type: 'panda' },
-          { emoji: '🧄', text: 'กลิ่นเข้มข้นอะไรสักอย่าง... อาจจะทุเรียน?', type: 'mochi' }
+          { emoji: '🍯', text: 'กลิ่นน้ำผึ้งอุ่นๆ หอมหวานแบบรู้สึกปลอดภัย', dim: 'S', val: 'S' },
+          { emoji: '🍓', text: 'กลิ่นสตรอว์เบอร์รี่สด จี๊ดนิดๆ สดชื่น', dim: 'S', val: 'S' },
+          { emoji: '🌺', text: 'กลิ่นดอกไม้แปลกๆ ที่ไม่รู้จักชื่อ', dim: 'S', val: 'U' },
+          { emoji: '🧄', text: 'กลิ่นเข้มข้นอะไรสักอย่าง... อาจจะทุเรียน?', dim: 'S', val: 'U' }
         ]
       },
       {
         label: 'ข้อ 5 — เจอเพื่อนสัตว์วิเศษ', dimension: '💛 วัด ความสัมพันธ์',
         text: 'เดินตามกลิ่น แล้วเจอสัตว์วิเศษตัวนึงนั่งรอคุณอยู่ มันเป็นแบบไหน?',
         options: [
-          { emoji: '🐰', text: 'กระต่ายขาวตาโต วิ่งเข้ามากอดเลย ไม่ถามไถ่', type: 'strawberry' },
-          { emoji: '🦊', text: 'สุนัขจิ้งจอกส้ม นั่งยิ้มอยู่เฉยๆ รอให้เราเข้าไปหา', type: 'panda' },
-          { emoji: '🦄', text: 'ยูนิคอร์นสีพาสเทล โบกหัวทักทายแล้วเดินนำ', type: 'alpaca' },
-          { emoji: '🐉', text: 'มังกรจิ๋วสีดำ เย็นชาแต่ดูเหมือนไว้ใจได้', type: 'mochi' }
+          { emoji: '🐰', text: 'กระต่ายขาวตาโต วิ่งเข้ามากอดเลย ไม่ถามไถ่', dim: 'R', val: 'W' },
+          { emoji: '🦊', text: 'สุนัขจิ้งจอกส้ม นั่งยิ้มอยู่เฉยๆ รอให้เราเข้าไปหา', dim: 'R', val: 'C' },
+          { emoji: '🦄', text: 'ยูนิคอร์นสีพาสเทล โบกหัวทักทายแล้วเดินนำ', dim: 'R', val: 'W' },
+          { emoji: '🐉', text: 'มังกรจิ๋วสีดำ เย็นชาแต่ดูเหมือนไว้ใจได้', dim: 'R', val: 'C' }
         ]
       },
       {
         label: 'ข้อ 6 — ขึ้นไปบนเมฆ', dimension: '🌟 วัด พลังงาน',
         text: 'ขี่สัตว์วิเศษขึ้นฟ้า มองลงไปเห็นอะไรแล้วตื่นเต้นที่สุด?',
         options: [
-          { emoji: '🎡', text: 'เมืองมีชิงช้าสวรรค์สีสันสดใส คนเยอะมาก', type: 'strawberry' },
-          { emoji: '🏘️', text: 'หมู่บ้านเล็กๆ มีควันไฟลอยขึ้น ดูอบอุ่น', type: 'alpaca' },
-          { emoji: '🌋', text: 'ภูเขาลึกลับที่ยังไม่มีใครไปถึง', type: 'mochi' },
-          { emoji: '🌊', text: 'ทะเลกว้างที่ไม่เห็นฝั่ง เงียบสงบมาก', type: 'panda' }
+          { emoji: '🎡', text: 'เมืองมีชิงช้าสวรรค์สีสันสดใส คนเยอะมาก', dim: 'E', val: 'B' },
+          { emoji: '🏘️', text: 'หมู่บ้านเล็กๆ มีควันไฟลอยขึ้น ดูอบอุ่น', dim: 'E', val: 'C' },
+          { emoji: '🌋', text: 'ภูเขาลึกลับที่ยังไม่มีใครไปถึง', dim: 'E', val: 'B' },
+          { emoji: '🌊', text: 'ทะเลกว้างที่ไม่เห็นฝั่ง เงียบสงบมาก', dim: 'E', val: 'C' }
         ]
       },
       {
         label: 'ข้อ 7 — อยู่บนเมฆ', dimension: '💛 วัด ความสัมพันธ์',
         text: 'บนเมฆมีที่ว่างกว้างมาก คุณทำอะไรก่อนเลย?',
         options: [
-          { emoji: '🧺', text: 'ปูผ้าปิกนิก แล้วโทรชวนเพื่อนขึ้นมาด้วย', type: 'alpaca' },
-          { emoji: '🔭', text: 'หยิบกล้องส่องทางไกล สำรวจคนเดียวก่อน', type: 'panda' },
-          { emoji: '🎉', text: 'กระโดดโหวกเหวก ดีใจที่ได้ขึ้นมาถึง', type: 'strawberry' },
-          { emoji: '📖', text: 'นั่งเงียบๆ ดูวิว แล้วจดบันทึกความรู้สึก', type: 'mochi' }
+          { emoji: '🧺', text: 'ปูผ้าปิกนิก แล้วโทรชวนเพื่อนขึ้นมาด้วย', dim: 'R', val: 'W' },
+          { emoji: '🔭', text: 'หยิบกล้องส่องทางไกล สำรวจคนเดียวก่อน', dim: 'R', val: 'C' },
+          { emoji: '🎉', text: 'กระโดดโหวกเหวก ดีใจที่ได้ขึ้นมาถึง', dim: 'R', val: 'W' },
+          { emoji: '📖', text: 'นั่งเงียบๆ ดูวิว แล้วจดบันทึกความรู้สึก', dim: 'R', val: 'C' }
         ]
       },
       {
         label: 'ข้อ 8 — ถึงเวลากลับ', dimension: '🎯 วัด การตัดสินใจ',
         text: 'พระอาทิตย์ตกแล้ว สัตว์วิเศษบอกว่าต้องกลับ คุณ...',
         options: [
-          { emoji: '😢', text: 'โอเค แต่ขอกอดมันไว้อีกนิดก่อนนะ', type: 'alpaca' },
-          { emoji: '📅', text: 'โอเค แต่ขอนัดว่าจะกลับมาอีกเมื่อไหร่ก่อน', type: 'mochi' },
-          { emoji: '😎', text: 'โอเค แล้วก็กระโดดกลับลงไปเลย ไม่เสียดาย', type: 'strawberry' },
-          { emoji: '🔥', text: 'ยังไม่กลับ! ขอสำรวจอีกหน่อย', type: 'panda' }
+          { emoji: '😢', text: 'โอเค แต่ขอกอดมันไว้อีกนิดก่อนนะ', dim: 'D', val: 'S' },
+          { emoji: '📅', text: 'โอเค แต่ขอนัดว่าจะกลับมาอีกเมื่อไหร่ก่อน', dim: 'D', val: 'S' },
+          { emoji: '😎', text: 'โอเค แล้วก็กระโดดกลับลงไปเลย ไม่เสียดาย', dim: 'D', val: 'B' },
+          { emoji: '🔥', text: 'ยังไม่กลับ! ขอสำรวจอีกหน่อย', dim: 'D', val: 'B' }
         ]
       }
     ];
 
-    let scores = {};
+    /* ── STATE ────────────────────────────────────────────────────── */
+    let dimScores = {};  // { E:{B:0,C:0}, R:{W:0,C:0}, D:{S:0,B:0}, S:{S:0,U:0} }
     let currentQ = 0;
     let fading = false;
+    let resultCode = '';
+
+    function resetScores() {
+      dimScores = { E:{B:0,C:0}, R:{W:0,C:0}, D:{S:0,B:0}, S:{S:0,U:0} };
+    }
+
+    function computeCode() {
+      const E = dimScores.E.B >= dimScores.E.C ? 'B' : 'C';
+      const R = dimScores.R.W >= dimScores.R.C ? 'W' : 'C';
+      const D = dimScores.D.S >= dimScores.D.B ? 'S' : 'B';
+      const S = dimScores.S.S >= dimScores.S.U ? 'S' : 'U';
+      return E + R + D + S;
+    }
+
+    /* ── SCREENS ──────────────────────────────────────────────────── */
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-' + id).classList.add('active');
+    }
 
     function startQuiz() {
-      scores = { alpaca: 0, strawberry: 0, panda: 0, mochi: 0 };
+      resetScores();
       currentQ = 0;
       fading = false;
       showScreen('quiz');
       renderQ();
-    }
-
-    function showScreen(id) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById('screen-' + id).classList.add('active');
     }
 
     function renderQ() {
@@ -443,14 +448,14 @@
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.innerHTML = '<span class="opt-emoji">' + opt.emoji + '</span><span>' + opt.text + '</span>';
-        btn.onclick = () => pick(opt.type);
+        btn.onclick = () => pick(opt);
         optEl.appendChild(btn);
       });
     }
 
-    function pick(type) {
+    function pick(opt) {
       if (fading) return;
-      scores[type]++;
+      dimScores[opt.dim][opt.val]++;
       fading = true;
       const content = document.getElementById('quiz-content');
       content.classList.add('fading');
@@ -466,56 +471,42 @@
       }, 260);
     }
 
-    function winner() {
-      const order = ['alpaca', 'strawberry', 'panda', 'mochi'];
-      let best = order[0];
-      for (const k of order) if (scores[k] > scores[best]) best = k;
-      return TYPES[best];
-    }
-
     function showResult() {
-      const t = winner();
+      resultCode = computeCode();
+      const t = TYPES[resultCode];
       const card = document.querySelector('.card');
       card.style.setProperty('--soft', t.soft);
       card.style.setProperty('--ink', t.ink);
+      card.style.setProperty('--shadow', t.soft.replace(')', ', 0.4)').replace('rgb(', 'rgba('));
 
-      document.getElementById('r-emoji').textContent = t.emoji;
+      document.getElementById('r-img').src = t.image;
+      document.getElementById('r-img').alt = t.name;
+      document.getElementById('r-code').textContent = resultCode;
       document.getElementById('r-name').textContent = t.name;
-      document.getElementById('r-tagline').textContent = t.tagline;
-      document.getElementById('r-desc').textContent = t.description;
-      document.getElementById('r-strengths').innerHTML =
-        t.strengths.map(s => '<span class="strength-tag">' + s + '</span>').join('');
-      document.getElementById('r-besties').innerHTML =
-        t.besties.map(k => {
-          const b = TYPES[k];
-          return '<div class="bestie"><span class="bestie-emoji">' + b.emoji + '</span><div class="bestie-name">' + b.name + '</div></div>';
-        }).join('');
+      document.getElementById('r-traits').innerHTML =
+        t.traits.map(tr => '<span class="trait-tag">' + tr + '</span>').join('');
+      document.getElementById('r-desc').textContent = t.desc;
       document.getElementById('progress-fill').style.width = '100%';
       showScreen('result');
     }
 
     function restartQuiz() { showScreen('welcome'); }
 
-    function shareData() {
-      const t = winner();
-      return {
-        text: 'ฉันเป็น ' + t.name + ' ' + t.emoji + ' ในควิซ "คุณเป็นสกุชชี่แบบไหน?" 🧁 แล้วคุณล่ะ?',
-        url: window.location.href
-      };
+    /* ── SHARE ────────────────────────────────────────────────────── */
+    function shareText() {
+      const t = TYPES[resultCode];
+      return 'ฉันเป็น ' + t.name + ' [' + resultCode + '] ในควิซ "คุณเป็นสกุชชี่แบบไหน?" 🧁 — ' + t.tagline + ' แล้วคุณล่ะเป็นสกุชชี่ไหน?';
     }
     function shareResult() {
-      const d = shareData();
       if (navigator.share) {
-        navigator.share({ title: 'คุณเป็นสกุชชี่แบบไหน?', text: d.text, url: d.url }).catch(() => {});
+        navigator.share({ title: 'คุณเป็นสกุชชี่แบบไหน?', text: shareText(), url: window.location.href }).catch(() => {});
       } else { shareFb(); }
     }
     function shareFb() {
-      const d = shareData();
-      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(d.url) + '&quote=' + encodeURIComponent(d.text), '_blank');
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href) + '&quote=' + encodeURIComponent(shareText()), '_blank');
     }
     function shareIg() {
-      const d = shareData();
-      try { if (navigator.clipboard) navigator.clipboard.writeText(d.text); } catch(e) {}
+      try { if (navigator.clipboard) navigator.clipboard.writeText(shareText()); } catch(e) {}
       const n = document.getElementById('copy-notice');
       n.textContent = '✓ คัดลอกแล้ว! วางในแคปชัน IG ได้เลย';
       setTimeout(() => n.textContent = '', 2400);
