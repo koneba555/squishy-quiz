@@ -614,6 +614,19 @@
     function restartQuiz() { showScreen('welcome'); }
 
     /* ── SHARE ────────────────────────────────────────────────────── */
+    function resultFilename() {
+      const EN = {
+        BWSS:'bread', BWSU:'strawberry', BWBS:'donut',       BWBU:'lemon',
+        BCSS:'marshmallow', BCSU:'mango', BCBS:'cake',        BCBU:'unchi',
+        CWSS:'salapao', CWSU:'cheese',   CWBS:'mochi',        CWBU:'durian',
+        CCSS:'butter',  CCSU:'matcha',   CCBS:'gummy-bear',   CCBU:'chocolate'
+      };
+      const now = new Date();
+      const d = now.getFullYear() +
+                String(now.getMonth() + 1).padStart(2, '0') +
+                String(now.getDate()).padStart(2, '0');
+      return d + '_squishy_' + (EN[resultCode] || resultCode) + '.png';
+    }
     function shareText() {
       const t = TYPES[resultCode];
       return 'ฉันเป็น ' + t.name + ' ในควิซ "คุณเป็นสกุชชี่แบบไหน?" 🧁 — ' + t.tagline + ' แล้วคุณล่ะ? ' + window.location.href;
@@ -631,7 +644,7 @@
         // Fallback: just the squishy image
         const res = await fetch(t.image);
         const blob = await res.blob();
-        return new File([blob], t.name + '.png', { type: blob.type || 'image/png' });
+        return new File([blob], resultFilename(), { type: blob.type || 'image/png' });
       }
 
       hideEls.forEach(e => e.style.display = 'none');
@@ -654,7 +667,7 @@
       rCtx.clip();
       rCtx.drawImage(canvas, 0, 0);
       const blob = await new Promise(r => rounded.toBlob(r, 'image/png'));
-      return new File([blob], t.name + '.png', { type: 'image/png' });
+      return new File([blob], resultFilename(), { type: 'image/png' });
     }
 
     function setShareBusy(msg) {
