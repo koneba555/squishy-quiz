@@ -636,19 +636,40 @@
       window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href) + '&quote=' + encodeURIComponent(shareText()), '_blank');
     }
 
+    function isMobile() {
+      return /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    }
+
     async function shareIg() {
       setShareBusy('กำลังสร้างรูป...');
+      let file;
+      try { file = await captureCard(); }
+      catch(e) { setShareBusy('สร้างรูปไม่สำเร็จ ลองใหม่'); setTimeout(() => setShareBusy(''), 3000); return; }
+
+      if (isMobile()) {
+        // Save image to device, then jump straight into IG Story camera.
+        // IG can't auto-attach the image from web (platform limit), so the
+        // user taps the gallery in Story camera to pick the just-saved image.
+        downloadFile(file);
+        setShareBusy('✓ บันทึกรูปแล้ว! แตะรูปล่างซ้ายใน Story เพื่อเลือกรูปสกุชชี่');
+        const t = setTimeout(() => { window.location.href = 'https://www.instagram.com/'; }, 2500);
+        window.location.href = 'instagram://story-camera';
+        // If IG app opened, page is backgrounded and the web fallback rarely fires.
+        setTimeout(() => setShareBusy(''), 6000);
+        return;
+      }
+
+      // Desktop: try Web Share with file, else download + open IG web.
       try {
-        const file = await captureCard();
-        setShareBusy('');
         if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          setShareBusy('');
           await navigator.share({ files: [file], title: 'คุณเป็นสกุชชี่แบบไหน?' });
           return;
         }
-        downloadFile(file);
-      } catch(e) { setShareBusy(''); }
+      } catch(e) {}
+      downloadFile(file);
       try { if (navigator.clipboard) await navigator.clipboard.writeText(shareText()); } catch(e) {}
-      setShareBusy('✓ บันทึกรูป + คัดลอกข้อความแล้ว เปิด IG วางในสตอรี่ได้เลย');
+      setShareBusy('✓ บันทึกรูป + คัดลอกข้อความแล้ว เปิด IG อัปโหลดสตอรี่ได้เลย');
       setTimeout(() => setShareBusy(''), 4000);
       window.open('https://www.instagram.com/', '_blank');
     }
