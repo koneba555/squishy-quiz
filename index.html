@@ -618,11 +618,14 @@
       }
 
       hideEls.forEach(e => e.style.display = 'none');
+      const origPad = card.style.padding;
+      card.style.padding = '20px';
       let canvas;
       try {
         canvas = await html2canvas(card, { backgroundColor: '#ffffff', scale: 2, useCORS: true, logging: false });
       } finally {
         hideEls.forEach(e => e.style.display = '');
+        card.style.padding = origPad;
       }
       const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
       return new File([blob], t.name + '.png', { type: 'image/png' });
