@@ -535,7 +535,7 @@
           content.classList.remove('fading');
           fading = false;
         }
-      }, 260);
+      }, 400);
     }
 
     /* ── COMPATIBILITY ────────────────────────────────────────────── */
@@ -608,7 +608,7 @@
     async function captureCard() {
       const t = TYPES[resultCode];
       const card = document.querySelector('.card');
-      const hideEls = card.querySelectorAll('.share-row, .copy-notice, .restart-btn');
+      const hideEls = card.querySelectorAll('.share-row, .copy-notice, .restart-btn, .btn-download');
 
       if (typeof html2canvas !== 'function') {
         // Fallback: just the squishy image
@@ -627,7 +627,16 @@
         hideEls.forEach(e => e.style.display = '');
         card.style.padding = origPad;
       }
-      const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
+      const rounded = document.createElement('canvas');
+      rounded.width = canvas.width;
+      rounded.height = canvas.height;
+      const rCtx = rounded.getContext('2d');
+      const radius = 28 * 2;
+      rCtx.beginPath();
+      rCtx.roundRect(0, 0, rounded.width, rounded.height, radius);
+      rCtx.clip();
+      rCtx.drawImage(canvas, 0, 0);
+      const blob = await new Promise(r => rounded.toBlob(r, 'image/png'));
       return new File([blob], t.name + '.png', { type: 'image/png' });
     }
 
