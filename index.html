@@ -19,6 +19,10 @@
       font-family: 'Itim', sans-serif;
       padding: 20px; overflow-x: hidden;
     }
+    .page-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      width: 100%; max-width: 480px;
+    }
 
     .cloud-layer {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
@@ -240,6 +244,7 @@
   </svg>
   <div class="cloud-layer" id="cloud-layer"></div>
 
+  <div class="page-wrap">
   <div class="card">
     <!-- WELCOME -->
     <div class="screen active" id="screen-welcome">
@@ -292,8 +297,9 @@
       <button class="btn btn-download" onclick="downloadResult()">💾 บันทึกรูป</button>
       <div class="copy-notice" id="copy-notice"></div>
       <button class="restart-btn" onclick="restartQuiz()">← ทำอีกครั้ง</button>
-      <p class="ai-note">หมายเหตุ: เนื้อหาบนเว็บไซต์นี้สร้างขึ้นโดยใช้ AI หากพบข้อมูลที่คลาดเคลื่อนหรือมีข้อเสนอแนะ สามารถ<a class="contact-link" onclick="openFeedback()">ติดต่อเรา</a>เพื่อแจ้งปรับปรุง</p>
     </div>
+  </div>
+  <p id="ai-note" class="ai-note" style="display:none">หมายเหตุ: เนื้อหาบนเว็บไซต์นี้สร้างขึ้นโดยใช้ AI หากพบข้อมูลที่คลาดเคลื่อนหรือมีข้อเสนอแนะ สามารถ<a class="contact-link" onclick="openFeedback()">ติดต่อเรา</a>เพื่อแจ้งปรับปรุง</p>
   </div>
 
   <!-- Feedback modal -->
@@ -661,10 +667,14 @@
       }
 
       showScreen('result');
+      document.getElementById('ai-note').style.display = 'block';
       trackResult();
     }
 
-    function restartQuiz() { showScreen('welcome'); }
+    function restartQuiz() {
+      document.getElementById('ai-note').style.display = 'none';
+      showScreen('welcome');
+    }
 
     /* ── TRACKING ────────────────────────────────────────────────── */
     const TRACK_URL = 'https://script.google.com/macros/s/AKfycbzucOuh0Kk9sKFBnUAc0P2HPWQz70VR5tX6BXRHZD3aFZohoyUErDVMA2JnvtGnrIOgtA/exec';
