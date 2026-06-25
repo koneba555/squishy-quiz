@@ -119,6 +119,12 @@
     .option-btn:active { background: #ece4ff; }
     .option-btn.jelly { animation: jellyPop 0.45s cubic-bezier(.36,.07,.19,.97) both; }
     .opt-emoji { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+    .back-btn {
+      background: none; border: none; padding: 6px 0; margin-top: 10px;
+      font-family: 'Itim', sans-serif; font-size: 13px;
+      color: #c8b8e0; cursor: pointer; display: block;
+    }
+    .back-btn:hover { color: #9b72e8; }
 
     .quiz-content { transition: opacity 0.26s ease; }
     .quiz-content.fading { opacity: 0; }
@@ -288,6 +294,7 @@
         <div class="q-dimension" id="q-dimension"></div>
         <div class="q-text" id="q-text"></div>
         <div class="options" id="options"></div>
+        <button id="back-btn" class="back-btn" onclick="goBack()" style="display:none">← ย้อนกลับ</button>
       </div>
     </div>
 
@@ -547,10 +554,12 @@
     let fading = false;
     let resultCode = '';
     let answers = [];
+    let answerOpts = [];
 
     function resetScores() {
       dimScores = { E:{B:0,C:0}, R:{W:0,C:0}, D:{S:0,B:0}, S:{S:0,U:0} };
       answers = [];
+      answerOpts = [];
     }
 
     function computeCode() {
@@ -579,6 +588,7 @@
     function renderQ() {
       const q = QUESTIONS[currentQ];
       document.getElementById('progress-fill').style.width = (currentQ / QUESTIONS.length * 100) + '%';
+      document.getElementById('back-btn').style.display = currentQ > 0 ? 'block' : 'none';
       document.getElementById('q-label').textContent = q.label;
       document.getElementById('q-dimension').textContent = q.dimension;
       document.getElementById('q-text').textContent = q.text;
@@ -603,6 +613,7 @@
       if (fading) return;
       dimScores[opt.dim][opt.val]++;
       answers.push(opt.emoji + ' ' + opt.text.substring(0, 20));
+      answerOpts.push(opt);
       fading = true;
       const content = document.getElementById('quiz-content');
       content.classList.add('fading');
@@ -693,6 +704,20 @@
       showScreen('result');
       document.getElementById('ai-note').style.display = 'block';
       trackResult();
+    }
+
+    function goBack() {
+      if (currentQ === 0 || fading) return;
+      const lastOpt = answerOpts.pop();
+      answers.pop();
+      dimScores[lastOpt.dim][lastOpt.val]--;
+      currentQ--;
+      const content = document.getElementById('quiz-content');
+      content.classList.add('fading');
+      setTimeout(() => {
+        renderQ();
+        content.classList.remove('fading');
+      }, 200);
     }
 
     function restartQuiz() {
