@@ -471,13 +471,15 @@
     ];
 
     /* ── STATE ────────────────────────────────────────────────────── */
-    let dimScores = {};  // { E:{B:0,C:0}, R:{W:0,C:0}, D:{S:0,B:0}, S:{S:0,U:0} }
+    let dimScores = {};
     let currentQ = 0;
     let fading = false;
     let resultCode = '';
+    let answers = [];
 
     function resetScores() {
       dimScores = { E:{B:0,C:0}, R:{W:0,C:0}, D:{S:0,B:0}, S:{S:0,U:0} };
+      answers = [];
     }
 
     function computeCode() {
@@ -529,6 +531,7 @@
     function pick(opt) {
       if (fading) return;
       dimScores[opt.dim][opt.val]++;
+      answers.push(opt.emoji + ' ' + opt.text.substring(0, 20));
       fading = true;
       const content = document.getElementById('quiz-content');
       content.classList.add('fading');
@@ -610,9 +613,26 @@
       }
 
       showScreen('result');
+      trackResult();
     }
 
     function restartQuiz() { showScreen('welcome'); }
+
+    /* ── TRACKING ────────────────────────────────────────────────── */
+    const TRACK_URL = 'https://script.google.com/macros/s/AKfycbzucOuh0Kk9sKFBnUAc0P2HPWQz70VR5tX6BXRHZD3aFZohoyUErDVMA2JnvtGnrIOgtA/exec';
+    function trackResult() {
+      const t = TYPES[resultCode];
+      const payload = {
+        result_code: resultCode, result_name: t.name,
+        q1: answers[0]||'', q2: answers[1]||'', q3: answers[2]||'', q4: answers[3]||'',
+        q5: answers[4]||'', q6: answers[5]||'', q7: answers[6]||'', q8: answers[7]||''
+      };
+      fetch(TRACK_URL, {
+        method: 'POST', mode: 'no-cors', keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(() => {});
+    }
 
     /* ── SHARE ────────────────────────────────────────────────────── */
     function resultFilename() {
