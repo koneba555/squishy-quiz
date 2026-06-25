@@ -123,6 +123,22 @@
     .quiz-content { transition: opacity 0.26s ease; }
     .quiz-content.fading { opacity: 0; }
 
+    @keyframes cardSquish {
+      0%   { transform: scale(1,1); }
+      8%   { transform: scale(0.91,1.1); }
+      18%  { transform: scale(1.12,0.91); }
+      30%  { transform: scale(0.95,1.06); }
+      42%  { transform: scale(1.06,0.95); }
+      54%  { transform: scale(0.97,1.03); }
+      66%  { transform: scale(1.03,0.97); }
+      78%  { transform: scale(0.99,1.01); }
+      88%  { transform: scale(1.01,0.99); }
+      100% { transform: scale(1,1); }
+    }
+    .card.squishing {
+      animation: cardSquish 2s cubic-bezier(.36,.07,.19,.97) forwards;
+    }
+
     /* ── RESULT ── */
     .result-img-wrap { text-align: center; margin-bottom: 20px; }
     .result-img {
@@ -590,15 +606,22 @@
       fading = true;
       const content = document.getElementById('quiz-content');
       content.classList.add('fading');
+
+      if (currentQ >= QUESTIONS.length - 1) {
+        document.getElementById('progress-fill').style.width = '100%';
+        setTimeout(() => {
+          const card = document.querySelector('.card');
+          card.classList.add('squishing');
+          setTimeout(() => { card.classList.remove('squishing'); showResult(); }, 2000);
+        }, 400);
+        return;
+      }
+
       setTimeout(() => {
-        if (currentQ >= QUESTIONS.length - 1) {
-          showResult();
-        } else {
-          currentQ++;
-          renderQ();
-          content.classList.remove('fading');
-          fading = false;
-        }
+        currentQ++;
+        renderQ();
+        content.classList.remove('fading');
+        fading = false;
       }, 400);
     }
 
