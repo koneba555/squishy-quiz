@@ -170,6 +170,39 @@
     .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
     .btn-primary { background: linear-gradient(135deg, #c084fc, #818cf8); color: white; }
     .btn-ig { background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af); color: white; flex: none; padding: 13px 16px; }
+    .ai-note {
+      font-size: 11px; color: #cbbedd; line-height: 1.7;
+      margin-top: 14px; text-align: center;
+      font-family: 'Itim', sans-serif;
+    }
+    .contact-link { color: #b399d4; text-decoration: underline; cursor: pointer; }
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(60,30,100,0.32);
+      z-index: 200; display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-card {
+      background: white; border-radius: 24px; padding: 32px 28px;
+      max-width: 440px; width: 100%;
+      box-shadow: 0 8px 40px rgba(90,50,160,0.2);
+    }
+    .modal-title {
+      font-family: 'Itim', sans-serif; font-size: 22px;
+      color: #5b3fa0; font-weight: 600; margin-bottom: 6px;
+    }
+    .modal-sub {
+      font-family: 'Itim', sans-serif; font-size: 13px;
+      color: #9a88b8; margin-bottom: 16px;
+    }
+    .feedback-ta {
+      width: 100%; min-height: 120px; border: 2px solid #ede5ff;
+      border-radius: 14px; padding: 12px 14px;
+      font-family: 'Itim', sans-serif; font-size: 15px;
+      color: #5b3fa0; resize: vertical; outline: none; margin-bottom: 12px;
+    }
+    .feedback-ta:focus { border-color: #c084fc; }
+    .modal-btns { display: flex; gap: 8px; }
+    .feedback-status { font-size: 13px; color: #c084fc; min-height: 20px; margin-top: 10px; text-align: center; }
     .site-credit {
       display: flex; align-items: center; justify-content: center;
       gap: 8px; margin-bottom: 16px;
@@ -259,6 +292,21 @@
       <button class="btn btn-download" onclick="downloadResult()">💾 บันทึกรูป</button>
       <div class="copy-notice" id="copy-notice"></div>
       <button class="restart-btn" onclick="restartQuiz()">← ทำอีกครั้ง</button>
+      <p class="ai-note">หมายเหตุ: เนื้อหาบนเว็บไซต์นี้สร้างขึ้นโดยใช้ AI หากพบข้อมูลที่คลาดเคลื่อนหรือมีข้อเสนอแนะ สามารถ<a class="contact-link" onclick="openFeedback()">ติดต่อเรา</a>เพื่อแจ้งปรับปรุง</p>
+    </div>
+  </div>
+
+  <!-- Feedback modal -->
+  <div id="feedback-modal" class="modal-overlay" style="display:none" onclick="if(event.target===this)closeFeedback()">
+    <div class="modal-card">
+      <div class="modal-title">ข้อแนะนำ / ติชม</div>
+      <div class="modal-sub">ส่งข้อเสนอแนะหรือแจ้งปัญหาที่พบ เราจะนำไปปรับปรุง</div>
+      <textarea id="feedback-text" class="feedback-ta" placeholder="พิมพ์ข้อเสนอแนะของคุณที่นี่..."></textarea>
+      <div class="modal-btns">
+        <button class="btn btn-primary" onclick="submitFeedback()">ส่ง</button>
+        <button class="restart-btn" style="margin-top:0;flex:1" onclick="closeFeedback()">ยกเลิก</button>
+      </div>
+      <div class="feedback-status" id="feedback-status"></div>
     </div>
   </div>
 
@@ -632,6 +680,29 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       }).catch(() => {});
+    }
+
+    /* ── FEEDBACK ────────────────────────────────────────────────── */
+    function openFeedback() {
+      document.getElementById('feedback-text').value = '';
+      document.getElementById('feedback-status').textContent = '';
+      document.getElementById('feedback-modal').style.display = 'flex';
+    }
+    function closeFeedback() {
+      document.getElementById('feedback-modal').style.display = 'none';
+    }
+    async function submitFeedback() {
+      const text = document.getElementById('feedback-text').value.trim();
+      if (!text) return;
+      const status = document.getElementById('feedback-status');
+      status.textContent = 'กำลังส่ง...';
+      fetch(TRACK_URL, {
+        method: 'POST', mode: 'no-cors', keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'feedback', message: text, result_code: resultCode })
+      }).catch(() => {});
+      status.textContent = '✓ ส่งแล้ว ขอบคุณสำหรับข้อเสนอแนะ';
+      setTimeout(closeFeedback, 2000);
     }
 
     /* ── SHARE ────────────────────────────────────────────────────── */
