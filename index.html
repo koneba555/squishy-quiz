@@ -812,6 +812,8 @@
       rounded.width = canvas.width;
       rounded.height = canvas.height;
       const rCtx = rounded.getContext('2d');
+      rCtx.fillStyle = '#ffffff';
+      rCtx.fillRect(0, 0, rounded.width, rounded.height);
       const radius = 28 * 2;
       rCtx.beginPath();
       rCtx.roundRect(0, 0, rounded.width, rounded.height, radius);
