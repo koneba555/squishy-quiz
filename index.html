@@ -7,6 +7,35 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Itim&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      if (/Instagram/.test(navigator.userAgent)) {
+        document.addEventListener('DOMContentLoaded', function() {
+          const ov = document.createElement('div');
+          ov.style.cssText = [
+            'position:fixed;inset:0;background:#fff;z-index:9999',
+            'display:flex;flex-direction:column;align-items:center;justify-content:center',
+            'padding:36px 28px;text-align:center;font-family:Itim,sans-serif'
+          ].join(';');
+          ov.innerHTML =
+            '<div style="font-size:64px;margin-bottom:16px">🧁</div>' +
+            '<div style="font-size:22px;font-weight:600;color:#5b3fa0;margin-bottom:12px">เปิดในเบราว์เซอร์ก่อนนะ</div>' +
+            '<div style="font-size:15px;color:#7c6ea0;line-height:1.8;margin-bottom:28px">' +
+              'เบราว์เซอร์ใน IG ไม่รองรับการบันทึกรูป<br>' +
+              'กด <strong style="color:#5b3fa0">···</strong> มุมขวาบน แล้วเลือก<br>' +
+              '<strong style="color:#5b3fa0">"เปิดใน Safari"</strong> หรือ <strong style="color:#5b3fa0">"เปิดในเบราว์เซอร์"</strong>' +
+            '</div>' +
+            '<a href="https://squishy-quiz.pages.dev" ' +
+              'style="background:linear-gradient(135deg,#d186c8,#9b72e8);color:white;' +
+              'padding:14px 32px;border-radius:16px;text-decoration:none;' +
+              'font-size:16px;font-weight:600;box-shadow:0 4px 20px rgba(155,114,232,0.35)">' +
+              'ลองเปิดใน Chrome' +
+            '</a>';
+          document.body.appendChild(ov);
+        });
+      }
+    })();
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
