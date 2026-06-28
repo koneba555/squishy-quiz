@@ -25,12 +25,20 @@
               'กด <strong style="color:#5b3fa0">···</strong> มุมขวาบน แล้วเลือก<br>' +
               '<strong style="color:#5b3fa0">"เปิดใน Safari"</strong> หรือ <strong style="color:#5b3fa0">"เปิดในเบราว์เซอร์"</strong>' +
             '</div>' +
-            '<a href="https://squishy-quiz.pages.dev" ' +
+            '<button id="ig-copy-btn" onclick="(function(){' +
+              'navigator.clipboard.writeText(\'https://squishy-quiz.pages.dev\').then(function(){' +
+              'var b=document.getElementById(\'ig-copy-btn\');' +
+              'b.textContent=\'✓ คัดลอกแล้ว!\';' +
+              'b.style.background=\'#4a9a5a\';' +
+              '});' +
+            '})()" ' +
               'style="background:linear-gradient(135deg,#d186c8,#9b72e8);color:white;' +
-              'padding:14px 32px;border-radius:16px;text-decoration:none;' +
-              'font-size:16px;font-weight:600;box-shadow:0 4px 20px rgba(155,114,232,0.35)">' +
-              'ลองเปิดใน Chrome' +
-            '</a>';
+              'padding:14px 32px;border-radius:16px;border:none;cursor:pointer;' +
+              'font-family:Itim,sans-serif;font-size:16px;font-weight:600;' +
+              'box-shadow:0 4px 20px rgba(155,114,232,0.35)">' +
+              '📋 คัดลอกลิงก์' +
+            '</button>' +
+            '<div style="font-size:13px;color:#b0a0c0;margin-top:14px">แล้วนำไปวางใน Safari หรือเบราว์เซอร์</div>';
           document.body.appendChild(ov);
         });
       }
